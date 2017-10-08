@@ -1,0 +1,61 @@
+﻿using TechTalk.SpecFlow;
+
+namespace BJSS.Steps
+{
+    public class ApiSteps
+    {
+        [Given(@"something or other")]
+        public void GivenSomethingOrOther()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I make a create call")]
+        public void WhenIMakeACreateCall()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"I have successfully created something")]
+        public void ThenIHaveSuccessfullyCreatedSomething()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I make a read call")]
+        public void WhenIMakeAReadCall()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"I can successfully read stuff")]
+        public void ThenICanSuccessfullyReadStuff()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I make an update call")]
+        public void WhenIMakeAnUpdateCall()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"I have successfully updated something")]
+        public void ThenIHaveSuccessfullyUpdatedSomething()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I make a delete call")]
+        public void WhenIMakeADeleteCall()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"I have successfully deleted something")]
+        public void ThenIHaveSuccessfullyDeletedSomething()
+        {
+            ScenarioContext.Current.Pending();
+        }
+    }
+}

@@ -108,5 +108,11 @@ namespace BJSS.Steps
             ScenarioContext.Current.Pending();
         }
 
+        [AfterScenario()]
+        public void AfterScenario()
+        {
+            PageFactory.WebDriver.Close();
+        }
+
     }
 }
