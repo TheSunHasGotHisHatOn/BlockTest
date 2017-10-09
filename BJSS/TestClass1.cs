@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using BJSS.Api;
 using BJSS.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -23,7 +25,7 @@ namespace BJSS
         private const string EMAIL = "katiecookson@hotmail.com";
         private const string PASSWORD = "BJSSTest";
 
-        [SetUp]
+       // [SetUp]
         public void Initialise()
         {
             _driver = new FirefoxDriver();
@@ -61,7 +63,31 @@ namespace BJSS
             AssertHelper.SpinUntilHit(_driver, _myAccountPage, secondsTimeout:5);
         }
 
-        [TearDown]
+        [Test]
+        public async Task GetApiTest()
+        {
+            var userResponse = await Reqres.GetUserAsync(2);
+
+            Assert.That(userResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), "Status code was wrong.  Expected OK but was {0}", userResponse.StatusCode);
+        }
+
+        [Test]
+        public async Task CreateApiTest()
+        {
+            var user = new User
+            {
+                avatar = "myAvatar",
+                first_name = "Lula",
+                last_name = "Paloosa"
+            };
+
+            var createdUserResponse = await Reqres.CreateUserAsync(user);
+
+            Assert.That(createdUserResponse.StatusCode, Is.EqualTo(HttpStatusCode.Created), "Status code was wrong.  Expected OK but was {0}", createdUserResponse.StatusCode);
+            Assert.That(createdUserResponse.User.first_name, Is.EqualTo(user.first_name), "user.first_name was wrong.");
+        }
+
+       // [TearDown]
         public void EndTest()
         {
             _driver.Close();

@@ -1,19 +1,25 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using BJSS.Api;
+using TechTalk.SpecFlow;
 
 namespace BJSS.Steps
 {
     public class ApiSteps
     {
+        private string baseUri = "https://regres.in/api/";
+
         [Given(@"something or other")]
         public void GivenSomethingOrOther()
         {
-            ScenarioContext.Current.Pending();
+            // ScenarioContext.Current.Pending();
         }
 
         [When(@"I make a create call")]
         public void WhenIMakeACreateCall()
         {
-            ScenarioContext.Current.Pending();
+            var user =  Reqres.GetUserAsync(2).Result;
         }
 
         [Then(@"I have successfully created something")]
