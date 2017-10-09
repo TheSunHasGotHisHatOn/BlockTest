@@ -9,6 +9,8 @@ namespace BJSS.Steps
 {
     public class BuyItemsSteps
     {
+        // remember to put in ability to use different browsers
+
         [Given(@"I have bought items")]
         public void GivenIHaveBoughtItems()
         {
