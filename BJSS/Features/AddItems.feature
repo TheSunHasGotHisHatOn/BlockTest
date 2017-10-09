@@ -28,23 +28,3 @@ Given I am logged in
 And I buy items
 When the test fails
 Then I can successfully capture a screen-grab
-
-Scenario: As a user I can successfully make a create call to an api
-Given something or other
-When I make a create call
-Then I have successfully created something
-
-Scenario: As a user I can successfully make a read call to an api
-Given something or other
-When I make a read call
-Then I can successfully read stuff
-
-Scenario: As a user I can successfully make an update call to an api
-Given something or other
-When I make an update call
-Then I have successfully updated something
-
-Scenario: As a user I can successfully make a delete call to an api
-Given something or other
-When I make a delete call
-Then I have successfully deleted something

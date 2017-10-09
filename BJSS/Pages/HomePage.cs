@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using BJSS.Pages.SubPages;
 using OpenQA.Selenium;
 
@@ -7,6 +8,8 @@ namespace BJSS.Pages
     public class HomePage : IPage
     {
         private IWebDriver _driver;
+
+        public NavBar NavBar { get; private set; }
 
         public HomePage(IWebDriver driver)
         {
@@ -28,14 +31,16 @@ namespace BJSS.Pages
             return IsHit();
         }
 
-       /* public IWebElement LoginButton
+        public ReadOnlyCollection<IWebElement> FeaturedItems
         {
             get
             {
-                return _driver.FindElement(By.ClassName("login"));
+                //return _driver.FindElement(By.Id("homefeatured"));
+                //return _driver.FindElements(By.XPath(".//*[@class='button ajax_add_to_cart_button btn btn-default']"));
+                //return _driver.FindElements(By.XPath(".//*[@class='quick-view']"));
+                return _driver.FindElements(By.XPath(".//*[@class='product-container']"));
+               // return _driver.FindElements(By.XPath(".//*[@class='ajax_block_product']"));
             }
-        }*/
-
-        public NavBar NavBar { get; private set; }
+        }
     }
 }

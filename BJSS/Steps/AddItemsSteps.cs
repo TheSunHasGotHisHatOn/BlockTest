@@ -1,12 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BJSS.Pages;
-using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using BJSS.Pages;
 using TechTalk.SpecFlow;
 
 namespace BJSS.Steps
@@ -16,17 +8,18 @@ namespace BJSS.Steps
     {
         private const string EMAIL = "katiecookson@hotmail.com";
         private const string PASSWORD = "BJSSTest";
+        private const int SECONDS_TIMEOUT = 20;
 
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
             // maybe navigate should be a class?
             PageFactory.HomePage.NavigateTo();
-           var loginButton = AssertHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, 5);
+           var loginButton = AssertHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, SECONDS_TIMEOUT);
            // PageFactory.HomePage.NavBar.LoginButton.Click();
            loginButton.Click();
 
-            Assert.That(PageFactory.LoginPage.IsHit(), Is.True, "Login page was not loaded.");
+            AssertHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox, SECONDS_TIMEOUT, "Login page was not hit in time.");
 
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.Clear();
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.SendKeys(EMAIL);
@@ -35,29 +28,40 @@ namespace BJSS.Steps
             PageFactory.LoginPage.AlreadyRegisteredPage.PasswordTextBox.SendKeys(PASSWORD);
 
             PageFactory.LoginPage.AlreadyRegisteredPage.SubmitButton.Click();
-
-            // System.Threading.Thread.Sleep(5000);
-
-            //Assert.That(_myAccountPage.IsHit(), Is.True, "My Account Page was not hit");
-            AssertHelper.SpinUntilHit(PageFactory.WebDriver, PageFactory.MyAccountPage, secondsTimeout: 5);
+            
+            AssertHelper.SpinUntilHit(PageFactory.WebDriver, PageFactory.MyAccountPage, SECONDS_TIMEOUT);
         }
 
         [When(@"I Quick View an item")]
         public void WhenIQuickViewAnItem()
         {
-            ScenarioContext.Current.Pending();
+            PageFactory.HomePage.NavigateTo();
+
+            var featureditems = PageFactory.HomePage.FeaturedItems;
+            // to do : make this view quickview (used other way so I can get the rest of the stuff done)
+            featureditems[0].Click();
+
+            /*Actions builder = new Actions(PageFactory.WebDriver);
+            builder.MoveToElement(featureditems[0]).Perform();*/
+
+            // By locator = By.ClassName("quick-view");
+
+            //Actions builder = new Actions(PageFactory.WebDriver);
+          //  IWebElement element = featureditems[0];
+           // builder.MoveToElement(element).Build().Perform();
+            // driver.manage().timeouts().implicitlyWait(10, TimeUnit.Seconds)
         }
 
         [When(@"I change the size of the item")]
         public void WhenIChangeTheSizeOfTheItem()
         {
-            ScenarioContext.Current.Pending();
+            //ScenarioContext.Current.Pending();
         }
 
         [When(@"I add that item to my basket")]
         public void WhenIAddThatItemToMyBasket()
         {
-            ScenarioContext.Current.Pending();
+            PageFactory.ProductPage.BuyButton.Click();
         }
 
         [When(@"I continue shopping")]
@@ -111,7 +115,7 @@ namespace BJSS.Steps
         [AfterScenario()]
         public void AfterScenario()
         {
-            PageFactory.WebDriver.Close();
+            PageFactory.CleanUp();
         }
 
     }

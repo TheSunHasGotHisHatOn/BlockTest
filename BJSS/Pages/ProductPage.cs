@@ -1,21 +1,21 @@
 ﻿using OpenQA.Selenium;
 
-namespace BJSS.Pages.SubPages
+namespace BJSS.Pages
 {
-    public class NavBar
+    public class ProductPage
     {
         private IWebDriver _driver;
 
-        public NavBar(IWebDriver driver)
+        public ProductPage(IWebDriver driver)
         {
             _driver = driver;
         }
 
-        public IWebElement LoginButton
+        public IWebElement BuyButton
         {
             get
             {
-                return _driver.FindElement(By.ClassName("login"));
+                return _driver.FindElement(By.Name("Submit"));
             }
         }
     }

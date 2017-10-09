@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
@@ -14,9 +15,7 @@ namespace BJSS.Pages
         private static HomePage _homePage = null;
         private static LoginPage _loginPage;
         private static MyAccountPage _myAccountPage;
-
-        private const string EMAIL = "katiecookson@hotmail.com";
-        private const string PASSWORD = "BJSSTest";
+        private static ProductPage _productPage;
 
         public static IWebDriver WebDriver
         {
@@ -61,6 +60,26 @@ namespace BJSS.Pages
 
                 return _myAccountPage;
             }
+        }
+
+        public static ProductPage ProductPage
+        {
+            get
+            {
+                if (_productPage == null)
+                    _productPage = new ProductPage(WebDriver);
+
+                return _productPage;
+            }
+        }
+
+        public static void CleanUp()
+        {
+            WebDriver.Close();
+            _homePage = null;
+            _loginPage = null;
+            _myAccountPage = null;
+            _driver = null;
         }
     }
 }
