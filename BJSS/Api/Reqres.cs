@@ -16,7 +16,7 @@ namespace BJSS.Api
         // for some reason the create method used doesn't have the api from the base url
         private const string CREATE_USER_PATH_TEMPLATE = "/api/users";
 
-        private const string UPDATE_USER_PATH_TEMPLATE = "/users/{0}";
+        private const string UPDATE_USER_PATH_TEMPLATE = "/api/users/{0}";
 
         private const string DELETE_USER_PATH_TEMPLATE = "/users/{0}";
 
@@ -54,11 +54,11 @@ namespace BJSS.Api
             return userResponse;
         }
 
-        public static async Task<CreateUserResponse> CreateUserAsync(User user)
+        public static async Task<UserResponse> CreateUserAsync(User user)
         {
             var client = GetClient();
-            var userAsJson = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(CREATE_USER_PATH_TEMPLATE, userAsJson);
+
+            var response = await client.PostAsync(CREATE_USER_PATH_TEMPLATE, user.AsStringContent());
             User createdUser = null;
 
             if (response.IsSuccessStatusCode)
@@ -67,21 +67,44 @@ namespace BJSS.Api
                 createdUser = JsonConvert.DeserializeObject<User>(json);
             }
 
-            return new CreateUserResponse
+            return new UserResponse
+            {
+                User = createdUser,
+                StatusCode = response.StatusCode
+            };
+        }
+
+        public static async Task<UserResponse> UpdateUserAsync(int id, User user)
+        {
+            var client = GetClient();
+            var path = string.Format(UPDATE_USER_PATH_TEMPLATE, id);
+            var response = await client.PutAsync(path, user.AsStringContent());
+
+            User updatedUser = null;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                updatedUser = JsonConvert.DeserializeObject<User>(json);
+            }
+
+            return new UserResponse
             {
                 User = user,
                 StatusCode = response.StatusCode
             };
         }
 
-        public object UpdateUser()
+        public static async Task<UserResponse> DeleteUserAsync(int id)
         {
-            return null;
-        }
+            var client = GetClient();
+            var path = string.Format(DELETE_USER_PATH_TEMPLATE, id);
+            var response = await client.DeleteAsync(path);
 
-        public object DeleteUser()
-        {
-            return null;
+            return new UserResponse
+            {
+                StatusCode = response.StatusCode
+            };
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BJSS.Api
 {
-    public class CreateUserResponse
+    public class UserResponse
     {
         public User User { get; set; }
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BJSS.Api
 {
@@ -17,5 +19,10 @@ namespace BJSS.Api
         public string avatar { get; set; }
 
         public string createdAt { get; set; }
+
+        public StringContent AsStringContent()
+        {
+            return new StringContent(JsonConvert.SerializeObject(this), Encoding.UTF8, "application/json");
+        }
     }
 }

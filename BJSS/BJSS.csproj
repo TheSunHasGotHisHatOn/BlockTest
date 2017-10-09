@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\CreateUserResponse.cs" />
+    <Compile Include="Api\UserResponse.cs" />
     <Compile Include="Api\GetUserResponse.cs" />
     <Compile Include="Api\Reqres.cs" />
     <Compile Include="Api\User.cs" />
