@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <StyleCopOverrideSettingsFile>Settings.StyleCop</StyleCopOverrideSettingsFile>
+    <BuildToolsStyleCopVersion>4.7.44.0</BuildToolsStyleCopVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,28 +24,27 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <StyleCopEnabled>False</StyleCopEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <StyleCopEnabled>True</StyleCopEnabled>
+    <StyleCopTreatErrorsAsWarnings>False</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit3-console, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\nunit3-console.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,15 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\UserResponse.cs" />
-    <Compile Include="Api\GetUserResponse.cs" />
     <Compile Include="Api\Reqres.cs" />
     <Compile Include="Api\User.cs" />
     <Compile Include="AssertHelper.cs" />
-    <Compile Include="Features\AddItems.feature.cs">
-      <DependentUpon>AddItems.feature</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="Pages\PageFactory.cs" />
     <Compile Include="Pages\ProductPage.cs" />
     <Compile Include="Pages\SubPages\AlreadyRegisteredPage.cs" />
@@ -82,21 +77,27 @@
     <Compile Include="Pages\IPage.cs" />
     <Compile Include="Pages\MyAccountPage.cs" />
     <Compile Include="Pages\SubPages\NavBar.cs" />
-    <Compile Include="Steps\AddItemsSteps.cs" />
-    <Compile Include="Steps\BuyItemsSteps.cs" />
+    <Compile Include="BddSteps\AddItemsSteps.cs" />
+    <Compile Include="BddSteps\BuyItemsSteps.cs" />
     <Compile Include="ApiCrudTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Api\ReqresUserBuilder.cs" />
+    <Compile Include="TestObjects\User.cs" />
+    <Compile Include="TestObjects\AutomationPracticeUserBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\AddItems.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddItems.feature.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\BuildTools.StyleCop.4.7.49.0\tools\StyleCop.targets" Condition="Exists('..\packages\BuildTools.StyleCop.4.7.49.0\tools\StyleCop.targets')" />
+  <Target Name="___packages_BuildTools_StyleCop_4_7_49_0_tools_StyleCop_targets" Condition="$(StyleCopOutputFile)==''" BeforeTargets="BeforeBuild">
+    <Error Text="BuildTools_StyleCop - the BuildTools_StyleCop package has not been restored.&#xD;&#xA;If you are running this from an IDE, make sure NuGet Package Restore has been enabled, then reload the solution and re-run the build.&#xD;&#xA;If you are running this from the command line, run the build again.&#xD;&#xA;If this is a CI server, you may want to make sure NuGet Package Restore runs before your build with:&#xD;&#xA;	msbuild solution.sln /t:restorepackages" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

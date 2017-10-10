@@ -24,28 +24,34 @@ namespace BJSS.Api
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return client;
-            
         }
 
-        public static async Task<GetUserResponse> GetUserAsync(int id)
+        public static async Task<UserResponse> GetUserAsync(int id)
         {
             var client = GetClient();
             var path = string.Format(GET_USER_PATH_TEMPLATE, id);
 
             HttpResponseMessage response = await client.GetAsync(path);
-
-            GetUserResponse userResponse;
+            var json = await response.Content.ReadAsStringAsync();
+            UserResponse userResponse;
 
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
-                userResponse = JsonConvert.DeserializeObject<GetUserResponse>(json);
+                try
+                {
+                    userResponse = JsonConvert.DeserializeObject<UserResponse>(json);
+                }
+                catch (Exception)
+                {
+                    userResponse = new UserResponse();
+                }
             }
             else
             {
-                userResponse = new GetUserResponse();
+                userResponse = new UserResponse();
             }
-
+            
+            userResponse.RawResponse = json;
             userResponse.StatusCode = response.StatusCode;
 
             return userResponse;
@@ -56,18 +62,19 @@ namespace BJSS.Api
             var client = GetClient();
 
             var response = await client.PostAsync(CREATE_USER_PATH_TEMPLATE, user.AsStringContent());
+            var json = await response.Content.ReadAsStringAsync();
             User createdUser = null;
 
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
                 createdUser = JsonConvert.DeserializeObject<User>(json);
             }
 
             return new UserResponse
             {
                 User = createdUser,
-                StatusCode = response.StatusCode
+                StatusCode = response.StatusCode,
+                RawResponse = json
             };
         }
 
@@ -76,19 +83,20 @@ namespace BJSS.Api
             var client = GetClient();
             var path = string.Format(UPDATE_USER_PATH_TEMPLATE, id);
             var response = await client.PutAsync(path, user.AsStringContent());
+            var json = await response.Content.ReadAsStringAsync();
 
             User updatedUser = null;
 
             if (response.IsSuccessStatusCode)
             {
-                var json = await response.Content.ReadAsStringAsync();
                 updatedUser = JsonConvert.DeserializeObject<User>(json);
             }
 
             return new UserResponse
             {
-                User = user,
-                StatusCode = response.StatusCode
+                User = updatedUser,
+                StatusCode = response.StatusCode,
+                RawResponse = json
             };
         }
 
@@ -100,7 +108,8 @@ namespace BJSS.Api
 
             return new UserResponse
             {
-                StatusCode = response.StatusCode
+                StatusCode = response.StatusCode,
+                RawResponse = await response.Content.ReadAsStringAsync()
             };
         }
     }

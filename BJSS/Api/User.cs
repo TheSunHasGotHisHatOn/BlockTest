@@ -6,15 +6,20 @@ namespace BJSS.Api
 {
     public class User
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
 
-        public string first_name { get; set; }
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
 
-        public string last_name { get; set; }
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
 
-        public string avatar { get; set; }
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
 
-        public string createdAt { get; set; }
+        [JsonProperty("createdAt")]
+        public string CreatedAt { get; set; }
 
         public StringContent AsStringContent()
         {

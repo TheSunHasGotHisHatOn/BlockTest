@@ -1,34 +1,37 @@
-﻿using BJSS.Pages;
+﻿using BJSS.Api;
+using BJSS.Pages;
+using BJSS.TestObjects;
 using TechTalk.SpecFlow;
 
-namespace BJSS.Steps
+namespace BJSS.BddSteps
 {
     [Binding]
     public class AddItemsSteps
     {
-        private const string EMAIL = "katiecookson@hotmail.com";
-        private const string PASSWORD = "BJSSTest";
         private const int SECONDS_TIMEOUT = 20;
 
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
-            // maybe navigate should be a class?
+            // todo: maybe navigate should be a class?
             PageFactory.HomePage.NavigateTo();
            var loginButton = AssertHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, SECONDS_TIMEOUT);
-           // PageFactory.HomePage.NavBar.LoginButton.Click();
+           // todo: PageFactory.HomePage.NavBar.LoginButton.Click();
            loginButton.Click();
+
+            var user = new AutomationPracticeUserBuilder().HasAccount().Build();
 
             AssertHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox, SECONDS_TIMEOUT, "Login page was not hit in time.");
 
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.Clear();
-            PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.SendKeys(EMAIL);
+            PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.SendKeys(user.Email);
 
             PageFactory.LoginPage.AlreadyRegisteredPage.PasswordTextBox.Clear();
-            PageFactory.LoginPage.AlreadyRegisteredPage.PasswordTextBox.SendKeys(PASSWORD);
+            PageFactory.LoginPage.AlreadyRegisteredPage.PasswordTextBox.SendKeys(user.Password);
 
             PageFactory.LoginPage.AlreadyRegisteredPage.SubmitButton.Click();
             
+            // todo: change name of asserthelper
             AssertHelper.SpinUntilHit(PageFactory.WebDriver, PageFactory.MyAccountPage, SECONDS_TIMEOUT);
         }
 
@@ -38,7 +41,7 @@ namespace BJSS.Steps
             PageFactory.HomePage.NavigateTo();
 
             var featureditems = PageFactory.HomePage.FeaturedItems;
-            // to do : make this view quickview (used other way so I can get the rest of the stuff done)
+            // todo : make this view quickview (used other way so I can get the rest of the stuff done)
             featureditems[0].Click();
 
             /*Actions builder = new Actions(PageFactory.WebDriver);
