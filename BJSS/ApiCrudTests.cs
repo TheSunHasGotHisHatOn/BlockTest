@@ -7,6 +7,12 @@ namespace BJSS
 {
     // todo: check that nuget can be used by bjss peeps
     // todo: find better place (than bin) to stick geckodriver.exe
+
+    /// <summary>
+    /// CRUD tests have been put in more traditional Arrange-Act-Assert framework because they're
+    /// much easier tests and testing them in this way is a lot easier and more maintainable. 
+    ///  The whole BDD framework adds a lot of overhead which for simple tests is overkill.
+    /// </summary>
     [TestFixture]
     public class ApiCrudTests
     {
