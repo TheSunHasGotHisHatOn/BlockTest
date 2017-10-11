@@ -12,7 +12,7 @@ namespace BJSS.Api
         private static HttpClient GetClient()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://reqres.in/api/");
+            client.BaseAddress = new Uri(AppSettings.ReqresBaseUri);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return client;

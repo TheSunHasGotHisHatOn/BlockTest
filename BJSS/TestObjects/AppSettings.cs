@@ -28,5 +28,10 @@ namespace BJSS.TestObjects
         {
             get { return int.Parse(ConfigurationManager.AppSettings["SECONDS_TIMEOUT"]); }
         }
+
+        public static string ReqresBaseUri
+        {
+            get { return ConfigurationManager.AppSettings["REQRES_BASE_URI"]; }
+        }
     }
 }
