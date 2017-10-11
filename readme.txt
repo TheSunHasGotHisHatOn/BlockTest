@@ -24,7 +24,7 @@ Features
 Pages
 
 3. Reports
-a. In the root directory there is a "Test" folder.  This contains the file RunTests.bat.  This file runs the tests and outputs the results (in the format yyyymmddhhmmss.xml) to a Results folder in the same directory.  It also creates a more human readable version of the report using ReportUnit which is saved in the same folder as yyyymmddhhmmss.html. 
+a. In the root directory there is a "Test" folder.  This contains the file RunTests.bat.  This file runs the tests and outputs the results (in the format yyyymmddhhmmss.xml) to a Results folder in the same directory.  It also creates a more human readable version of the report using ReportUnit which is saved in the same folder in the format yyyymmddhhmmss.html. 
 
 b. Tech Debt
 * I was hoping to create a symlink named "latest" pointing to the lastest xml file, however I'm working in Parallels on a mac, and it seems macs aren't too keen on using ntfs. 
