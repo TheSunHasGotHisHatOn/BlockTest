@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using BJSS.ReqresApi;
 using NUnit.Framework;
 
-namespace BJSS
+namespace BJSS.Tests
 {
     /// <summary>
     /// CRUD tests have been put in more traditional Arrange-Act-Assert framework because they're

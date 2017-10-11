@@ -4,7 +4,7 @@ using BJSS.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace BJSS
+namespace BJSS.Helpers
 {
     public static class WaitHelper
     {

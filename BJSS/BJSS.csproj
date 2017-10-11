@@ -106,14 +106,14 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="ReqresTests.cs" />
+    <Compile Include="Tests\ReqresTests.cs" />
     <Compile Include="ReqresApi\ReqresResponse.cs" />
     <Compile Include="ReqresApi\ReqresPage.cs" />
     <Compile Include="ReqresApi\User.cs" />
     <Compile Include="Enums\Browser.cs" />
     <Compile Include="Pages\Factories\DriverFactory.cs" />
     <Compile Include="TestObjects\AppSettings.cs" />
-    <Compile Include="WaitHelper.cs" />
+    <Compile Include="Helpers\WaitHelper.cs" />
     <Compile Include="Pages\Factories\PageFactory.cs" />
     <Compile Include="Pages\ProductPage.cs" />
     <Compile Include="Pages\SubPages\AlreadyRegisteredPage.cs" />
