@@ -70,7 +70,7 @@ namespace BJSS.Pages.Factories
 
         public static void CleanUp()
         {
-            WebDriver.Close();
+            WebDriver.Quit();
             _homePage = null;
             _loginPage = null;
             _myAccountPage = null;

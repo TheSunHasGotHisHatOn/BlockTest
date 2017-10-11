@@ -13,21 +13,15 @@ set minute=%time:~3,2%
 set second=%time:~6,2%
 set filename=%todaydate%%hour%%minute%%second%
 
-echo todaydate: %todaydate%
-echo hour %hour%
-echo minute %minute%
-echo second %second%
-echo filename %filename%
-
-rem set filename=%foldername%%time:~0,2%%time:~3,2%%time:~6,2%
-rem echo filename (time) %filename%
-
-pause
 @echo about to run tests
-@echo Results/%foldername%/%filename%.xml
+@echo results will be written to Results/%filename%.xml
 pause
-echo current dir: %cd%
-rem ..\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console /result:Results/%foldername%/%filename%.xml  ../BJSS/bin/debug/BJSS.dll
 ..\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console /result:Results/%filename%.xml  ../BJSS/bin/debug/BJSS.dll
+
+@echo delete latest.xml if it exists
+if exist Results/latest.xml del Results/latest.xml 
+@echo create new latest.xml
+mklink /H Results/latest.xml Results/%filename%.xml
+
 @echo finished running tests
 pause

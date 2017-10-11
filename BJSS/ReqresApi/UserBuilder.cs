@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace BJSS.Api
 {
-    public class ReqresUserBuilder
+    public class UserBuilder
     {
         private readonly User _user;
 
-        public ReqresUserBuilder()
+        public UserBuilder()
         {
               _user = new User();  
         }
 
-        public ReqresUserBuilder HasNonEnglishUnicodeCharacter()
+        public UserBuilder HasNonEnglishUnicodeCharacter()
         {
             _user.Avatar = "myAvatar";
             _user.FirstName = "Lula";
@@ -23,7 +20,7 @@ namespace BJSS.Api
             return this;
         }
 
-        public ReqresUserBuilder HasEscapeCharacter()
+        public UserBuilder HasEscapeCharacter()
         {
             _user.Avatar = "myAvatar";
             _user.FirstName = @"Lula\";

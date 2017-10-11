@@ -7,18 +7,24 @@ using Newtonsoft.Json;
 
 namespace BJSS.Api
 {
-    public class Reqres
+    public class ReqresPage
     {
-        private static HttpClient GetClient()
+        private HttpClient _client = null;
+
+        private HttpClient GetClient()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(AppSettings.ReqresBaseUri);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            return client;
+            if (_client == null)
+            {
+                _client = new HttpClient();
+                _client.BaseAddress = new Uri(AppSettings.ReqresBaseUri);
+                _client.DefaultRequestHeaders.Accept.Clear();
+                _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            
+            return _client;
         }
 
-        public static async Task<ReqresResponse> GetUserAsync(int id)
+        public async Task<ReqresResponse> GetUserAsync(int id)
         {
             var client = GetClient();
             var path = string.Format(AppSettings.GetUserPathTemplate, id);
@@ -49,7 +55,7 @@ namespace BJSS.Api
             return userResponse;
         }
 
-        public static async Task<ReqresResponse> CreateUserAsync(User user)
+        public async Task<ReqresResponse> CreateUserAsync(User user)
         {
             var client = GetClient();
 
@@ -70,7 +76,7 @@ namespace BJSS.Api
             };
         }
 
-        public static async Task<ReqresResponse> UpdateUserAsync(int id, User user)
+        public async Task<ReqresResponse> UpdateUserAsync(int id, User user)
         {
             var client = GetClient();
             var path = string.Format(AppSettings.UpdateUserPathTemplate, id);
@@ -92,7 +98,7 @@ namespace BJSS.Api
             };
         }
 
-        public static async Task<ReqresResponse> DeleteUserAsync(int id)
+        public async Task<ReqresResponse> DeleteUserAsync(int id)
         {
             var client = GetClient();
             var path = string.Format(AppSettings.DeleteUserPathTemplate, id);

@@ -40,8 +40,36 @@
     <StyleCopTreatErrorsAsWarnings>False</StyleCopTreatErrorsAsWarnings>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Ghpr.Core, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ghpr.Core.0.6.0\lib\net40\Ghpr.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ghpr.NUnit, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ghpr.NUnit.0.7.0\lib\Ghpr.NUnit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.Engine.3.7.0\lib\Mono.Cecil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit-agent, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.Engine.3.7.0\lib\nunit-agent.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit-agent-x86, Version=3.7.0.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\NUnit.Engine.3.7.0\lib\nunit-agent-x86.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.engine, Version=3.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.Engine.3.7.0\lib\nunit.engine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.engine.api, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.Engine.3.7.0\lib\nunit.engine.api.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -49,6 +77,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
@@ -67,22 +96,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\UserResponse.cs" />
-    <Compile Include="Api\Reqres.cs" />
-    <Compile Include="Api\User.cs" />
-    <Compile Include="Features\ReviewPurchases.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReviewPurchases.feature</DependentUpon>
-    </Compile>
+    <Compile Include="ReqresTests.cs" />
+    <Compile Include="ReqresApi\ReqresResponse.cs" />
+    <Compile Include="ReqresApi\ReqresPage.cs" />
+    <Compile Include="ReqresApi\User.cs" />
     <Compile Include="Enums\Browser.cs" />
     <Compile Include="Pages\Factories\DriverFactory.cs" />
+    <Compile Include="TestObjects\AppSettings.cs" />
     <Compile Include="WaitHelper.cs" />
-    <Compile Include="Features\BuyItems.feature.cs">
-      <DependentUpon>BuyItems.feature</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Include="Pages\Factories\PageFactory.cs" />
     <Compile Include="Pages\ProductPage.cs" />
     <Compile Include="Pages\SubPages\AlreadyRegisteredPage.cs" />
@@ -93,22 +114,15 @@
     <Compile Include="Pages\SubPages\NavBar.cs" />
     <Compile Include="BddSteps\BuyItemsSteps.cs" />
     <Compile Include="BddSteps\ReviewPurchasesSteps.cs" />
-    <Compile Include="ApiCrudTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Api\ReqresUserBuilder.cs" />
+    <Compile Include="ReqresApi\UserBuilder.cs" />
     <Compile Include="TestObjects\User.cs" />
     <Compile Include="TestObjects\AutomationPracticeUserBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\BuyItems.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>BuyItems.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\ReviewPurchases.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ReviewPurchases.feature.cs</LastGenOutput>
-    </None>
+    <None Include="Ghpr.Core.Settings.json" />
+    <None Include="Ghpr.NUnit.Settings.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\geckodriver.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.WebDriver.IEDriver.3.6.0\build\Selenium.WebDriver.IEDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.IEDriver.3.6.0\build\Selenium.WebDriver.IEDriver.targets')" />

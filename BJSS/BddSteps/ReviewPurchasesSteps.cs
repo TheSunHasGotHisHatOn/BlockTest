@@ -9,7 +9,6 @@ namespace BJSS.BddSteps
         public void GivenIHaveBoughtItems()
         {
             var buySteps = new BuyItemsSteps();
-            buySteps.GivenIAmLoggedIn();
             buySteps.WhenIQuickViewAnItem();
             buySteps.WhenIAddThatItemToMyBasket();
             buySteps.ThenIViewTheBasket();
@@ -51,6 +50,5 @@ namespace BJSS.BddSteps
         {
             ScenarioContext.Current.Pending();
         }
-
     }
 }

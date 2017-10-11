@@ -16,10 +16,10 @@ And Total Products is the sum of the two items
 And Total equals the Total Products + Shipping
 And I proceed through checkout to payment
 Examples:
-| browser |
-| Chrome  |
-| Firefox |
-| InternetExplorer      |
+| browser          |
+| Chrome           |
+| Firefox          |
+| InternetExplorer |
 
 
 
