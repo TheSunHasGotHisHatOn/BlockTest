@@ -27,7 +27,15 @@ namespace BJSS.Pages
 
         public bool NavigateTo()
         {
-            _driver.Url = "http://automationpractice.com/index.php";
+            try
+            {
+                _driver.Url = "http://automationpractice.com/index.php";
+            }
+            catch (Exception ex)
+            { 
+                throw;
+            }
+            
             return IsHit();
         }
 

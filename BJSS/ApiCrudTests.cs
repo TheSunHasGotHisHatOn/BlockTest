@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using BJSS.Api;
 using NUnit.Framework;
@@ -7,7 +6,6 @@ using NUnit.Framework;
 namespace BJSS
 {
     // todo: find better place (than bin) to stick geckodriver.exe
-    // todo: parallisation in nunit
 
     /// <summary>
     /// CRUD tests have been put in more traditional Arrange-Act-Assert framework because they're
@@ -18,6 +16,7 @@ namespace BJSS
     public class ApiCrudTests
     {
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         public async Task GetApiTest()
         {
             // arrange
@@ -35,6 +34,7 @@ namespace BJSS
         }
 
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         public async Task CreateApiTest()
         {
             // arrange
@@ -61,6 +61,7 @@ namespace BJSS
         }
 
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         public async Task UpdateApiTest()
         {
             //arrange
@@ -94,6 +95,7 @@ namespace BJSS
         }
 
         [Test]
+        [Parallelizable(ParallelScope.Self)]
         public async Task DeleteApiTest()
         {
             // arrange
