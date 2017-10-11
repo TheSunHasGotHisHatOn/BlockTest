@@ -13,8 +13,9 @@ namespace BJSS
             Assert.IsTrue(SpinWait.SpinUntil(() => page.IsHit(), TimeSpan.FromSeconds(secondsTimeout)), message);
         }
 
-        public static IWebElement SpinUntilVisible(IWebDriver driver, IWebElement element, int secondsTimeout, string message = "")
+        public static IWebElement SpinUntilVisible(IWebDriver driver, IWebElement element, string elementName, int secondsTimeout, string message = "")
         {
+            Assert.That(element, Is.Not.Null, "Element '{0}' was null", elementName);
             Assert.IsTrue(SpinWait.SpinUntil(() => element != null, TimeSpan.FromSeconds(secondsTimeout)), message);
             return element;
         }

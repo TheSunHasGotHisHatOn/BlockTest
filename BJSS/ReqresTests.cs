@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-using BJSS.Api;
+using BJSS.ReqresApi;
 using NUnit.Framework;
 
 namespace BJSS
