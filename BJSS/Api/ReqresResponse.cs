@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace BJSS.Api
 {
-    public class UserResponse
+    public class ReqresResponse
     {
         [JsonProperty("data")]
         public User User { get; set; }

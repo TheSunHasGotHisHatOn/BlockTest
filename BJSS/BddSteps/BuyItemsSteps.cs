@@ -11,18 +11,16 @@ namespace BJSS.BddSteps
     [Binding]
     public class BuyItemsSteps
     {
-        private const int SECONDS_TIMEOUT = 20;
-
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
             PageFactory.HomePage.NavigateTo();
-            var loginButton = WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, SECONDS_TIMEOUT);
+            var loginButton = WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, AppSettings.TimeoutInSeconds);
             loginButton.Click();
 
             var user = new AutomationPracticeUserBuilder().HasAccount().Build();
 
-            WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox, SECONDS_TIMEOUT, "Login page was not hit in time.");
+            WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox, AppSettings.TimeoutInSeconds, "Login page was not hit in time.");
 
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.Clear();
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.SendKeys(user.Email);
@@ -32,7 +30,7 @@ namespace BJSS.BddSteps
 
             PageFactory.LoginPage.AlreadyRegisteredPage.SubmitButton.Click();
 
-            WaitHelper.SpinUntilHit(PageFactory.WebDriver, PageFactory.MyAccountPage, SECONDS_TIMEOUT);
+            WaitHelper.SpinUntilHit(PageFactory.WebDriver, PageFactory.MyAccountPage, AppSettings.TimeoutInSeconds);
         }
 
         [When(@"I Quick View an item")]

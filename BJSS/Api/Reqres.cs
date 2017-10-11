@@ -2,21 +2,13 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BJSS.TestObjects;
 using Newtonsoft.Json;
 
 namespace BJSS.Api
 {
     public class Reqres
     {
-        private const string GET_USER_PATH_TEMPLATE = "users/{0}";
-
-        // for some reason the create method used doesn't have the api from the base url
-        private const string CREATE_USER_PATH_TEMPLATE = "/api/users";
-
-        private const string UPDATE_USER_PATH_TEMPLATE = "/api/users/{0}";
-
-        private const string DELETE_USER_PATH_TEMPLATE = "/users/{0}";
-
         private static HttpClient GetClient()
         {
             HttpClient client = new HttpClient();
@@ -26,29 +18,29 @@ namespace BJSS.Api
             return client;
         }
 
-        public static async Task<UserResponse> GetUserAsync(int id)
+        public static async Task<ReqresResponse> GetUserAsync(int id)
         {
             var client = GetClient();
-            var path = string.Format(GET_USER_PATH_TEMPLATE, id);
+            var path = string.Format(AppSettings.GetUserPathTemplate, id);
 
             HttpResponseMessage response = await client.GetAsync(path);
             var json = await response.Content.ReadAsStringAsync();
-            UserResponse userResponse;
+            ReqresResponse userResponse;
 
             if (response.IsSuccessStatusCode)
             {
                 try
                 {
-                    userResponse = JsonConvert.DeserializeObject<UserResponse>(json);
+                    userResponse = JsonConvert.DeserializeObject<ReqresResponse>(json);
                 }
                 catch (Exception)
                 {
-                    userResponse = new UserResponse();
+                    userResponse = new ReqresResponse();
                 }
             }
             else
             {
-                userResponse = new UserResponse();
+                userResponse = new ReqresResponse();
             }
             
             userResponse.RawResponse = json;
@@ -57,11 +49,11 @@ namespace BJSS.Api
             return userResponse;
         }
 
-        public static async Task<UserResponse> CreateUserAsync(User user)
+        public static async Task<ReqresResponse> CreateUserAsync(User user)
         {
             var client = GetClient();
 
-            var response = await client.PostAsync(CREATE_USER_PATH_TEMPLATE, user.AsStringContent());
+            var response = await client.PostAsync(AppSettings.CreateUserPathTemplate, user.AsStringContent());
             var json = await response.Content.ReadAsStringAsync();
             User createdUser = null;
 
@@ -70,7 +62,7 @@ namespace BJSS.Api
                 createdUser = JsonConvert.DeserializeObject<User>(json);
             }
 
-            return new UserResponse
+            return new ReqresResponse
             {
                 User = createdUser,
                 StatusCode = response.StatusCode,
@@ -78,10 +70,10 @@ namespace BJSS.Api
             };
         }
 
-        public static async Task<UserResponse> UpdateUserAsync(int id, User user)
+        public static async Task<ReqresResponse> UpdateUserAsync(int id, User user)
         {
             var client = GetClient();
-            var path = string.Format(UPDATE_USER_PATH_TEMPLATE, id);
+            var path = string.Format(AppSettings.UpdateUserPathTemplate, id);
             var response = await client.PutAsync(path, user.AsStringContent());
             var json = await response.Content.ReadAsStringAsync();
 
@@ -92,7 +84,7 @@ namespace BJSS.Api
                 updatedUser = JsonConvert.DeserializeObject<User>(json);
             }
 
-            return new UserResponse
+            return new ReqresResponse
             {
                 User = updatedUser,
                 StatusCode = response.StatusCode,
@@ -100,13 +92,13 @@ namespace BJSS.Api
             };
         }
 
-        public static async Task<UserResponse> DeleteUserAsync(int id)
+        public static async Task<ReqresResponse> DeleteUserAsync(int id)
         {
             var client = GetClient();
-            var path = string.Format(DELETE_USER_PATH_TEMPLATE, id);
+            var path = string.Format(AppSettings.DeleteUserPathTemplate, id);
             var response = await client.DeleteAsync(path);
 
-            return new UserResponse
+            return new ReqresResponse
             {
                 StatusCode = response.StatusCode,
                 RawResponse = await response.Content.ReadAsStringAsync()
