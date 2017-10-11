@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 
 namespace BJSS.Pages.Factories
 {
@@ -15,6 +16,8 @@ namespace BJSS.Pages.Factories
                     return new ChromeDriver();
                 case Browser.Firefox:
                     return new FirefoxDriver();
+                case Browser.InternetExplorer:
+                    return new InternetExplorerDriver();
                 default:
                     return new FirefoxDriver();
             }
