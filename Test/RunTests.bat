@@ -8,9 +8,11 @@ for /f "skip=1" %%d in ('wmic os get localdatetime') do if not defined mydate se
 
 
 set todaydate=%mydate:~0,8%
-set hour=%time:~0,2%
-set minute=%time:~3,2%
-set second=%time:~6,2%
+rem time less than 10 is represented as 0,1,2 instead of 00, 01, 02 which breaks the file system.  this fixes it.
+set timeNoSpace=%time: =0%
+set hour=%timeNoSpace:~0,2%
+set minute=%timeNoSpace:~3,2%
+set second=%timeNoSpace:~6,2%
 set filename=%todaydate%%hour%%minute%%second%
 
 @echo About to run tests
