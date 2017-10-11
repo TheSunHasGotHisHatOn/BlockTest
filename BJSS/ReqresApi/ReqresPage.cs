@@ -2,10 +2,11 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using BJSS.Api;
 using BJSS.TestObjects;
 using Newtonsoft.Json;
 
-namespace BJSS.Api
+namespace BJSS.ReqresApi
 {
     public class ReqresPage
     {

@@ -1,5 +1,4 @@
-﻿
-namespace BJSS.TestObjects
+﻿namespace BJSS.TestObjects
 {
     public class AutomationPracticeUserBuilder 
     {

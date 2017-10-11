@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using BJSS.TestObjects;
+using OpenQA.Selenium;
 
 namespace BJSS.Pages
 {
@@ -13,7 +14,7 @@ namespace BJSS.Pages
 
         public bool IsHit()
         {
-            return _driver.Title.ToLower() == "my account - my store";
+            return _driver.Title.ToLower() == AppSettings.MyaccountpageTitle;
         }
     }
 }

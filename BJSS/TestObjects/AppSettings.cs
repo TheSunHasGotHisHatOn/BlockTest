@@ -33,5 +33,25 @@ namespace BJSS.TestObjects
         {
             get { return ConfigurationManager.AppSettings["REQRES_BASE_URI"]; }
         }
+
+        public static string AutomationPracticeBaseUri
+        {
+            get { return ConfigurationManager.AppSettings["AUTOMATION_PRACTICE_BASE_URI"]; }
+        }
+
+        public static string HomepageTitle
+        {
+            get { return ConfigurationManager.AppSettings["HOMEPAGE_TITLE"]; }
+        }
+
+        public static string LoginpageTitle
+        {
+            get { return ConfigurationManager.AppSettings["LOGINPAGE_TITLE"]; }
+        }
+
+        public static string MyaccountpageTitle
+        {
+            get { return ConfigurationManager.AppSettings["MYACCOUNTPAGE_TITLE"]; }
+        }
     }
 }

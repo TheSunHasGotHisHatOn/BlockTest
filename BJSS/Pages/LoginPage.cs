@@ -1,4 +1,5 @@
 ﻿using BJSS.Pages.SubPages;
+using BJSS.TestObjects;
 using OpenQA.Selenium;
 
 namespace BJSS.Pages
@@ -15,7 +16,7 @@ namespace BJSS.Pages
 
         public bool IsHit()
         { 
-            return _driver.Title.ToLower() == "login - my store";
+            return _driver.Title.ToLower() == AppSettings.LoginpageTitle;
         }
 
         public AlreadyRegisteredPage AlreadyRegisteredPage { get; private set; }

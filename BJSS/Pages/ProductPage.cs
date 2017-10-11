@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace BJSS.Pages
 {
@@ -15,7 +16,14 @@ namespace BJSS.Pages
         {
             get
             {
-                return _driver.FindElement(By.Name("Submit"));
+                try
+                {
+                    return _driver.FindElement(By.Name("Submit"));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
     }

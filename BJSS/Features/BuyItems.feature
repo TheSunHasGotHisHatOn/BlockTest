@@ -19,7 +19,6 @@ Examples:
 | browser          |
 | Chrome           |
 | Firefox          |
-| InternetExplorer |
 
 
 

@@ -1,10 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace BJSS.Pages.SubPages
 {
     public class AlreadyRegisteredPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public AlreadyRegisteredPage(IWebDriver driver)
         {
@@ -13,17 +14,47 @@ namespace BJSS.Pages.SubPages
 
         public IWebElement EmailTextBox
         {
-            get { return _driver.FindElement(By.Id("email")); }
+            get
+            {
+                try
+                {
+                    return _driver.FindElement(By.Id("email"));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
         }
 
         public IWebElement PasswordTextBox
         {
-            get { return _driver.FindElement(By.Id("passwd")); }
+            get
+            {
+                try
+                {
+                    return _driver.FindElement(By.Id("passwd"));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
         }
 
         public IWebElement SubmitButton
         {
-            get { return _driver.FindElement(By.Id("SubmitLogin")); }
+            get
+            {
+                try
+                {
+                    return _driver.FindElement(By.Id("SubmitLogin"));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
         }
     }
 }

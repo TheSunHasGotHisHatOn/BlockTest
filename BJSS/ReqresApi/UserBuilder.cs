@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace BJSS.Api
+﻿namespace BJSS.ReqresApi
 {
     public class UserBuilder
     {

@@ -6,7 +6,7 @@ namespace BJSS.Pages.Factories
     public class PageFactory
     {
         private static IWebDriver _driver;
-        private static HomePage _homePage = null;
+        private static HomePage _homePage;
         private static LoginPage _loginPage;
         private static MyAccountPage _myAccountPage;
         private static ProductPage _productPage;
@@ -71,6 +71,7 @@ namespace BJSS.Pages.Factories
         public static void CleanUp()
         {
             WebDriver.Quit();
+
             _homePage = null;
             _loginPage = null;
             _myAccountPage = null;

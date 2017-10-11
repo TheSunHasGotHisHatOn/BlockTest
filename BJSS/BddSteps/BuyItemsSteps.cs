@@ -1,7 +1,5 @@
 ﻿using System;
-using BJSS.Api;
 using BJSS.Enums;
-using BJSS.Pages;
 using BJSS.Pages.Factories;
 using BJSS.TestObjects;
 using TechTalk.SpecFlow;
@@ -15,12 +13,12 @@ namespace BJSS.BddSteps
         public void GivenIAmLoggedIn()
         {
             PageFactory.HomePage.NavigateTo();
-            var loginButton = WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, AppSettings.TimeoutInSeconds);
+            var loginButton = WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.HomePage.NavBar.LoginButton, "LoginButton", AppSettings.TimeoutInSeconds);
             loginButton.Click();
 
             var user = new AutomationPracticeUserBuilder().HasAccount().Build();
 
-            WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox, AppSettings.TimeoutInSeconds, "Login page was not hit in time.");
+            WaitHelper.SpinUntilVisible(PageFactory.WebDriver, PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox, "EmailTextBox", AppSettings.TimeoutInSeconds, "Login page was not hit in time.");
 
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.Clear();
             PageFactory.LoginPage.AlreadyRegisteredPage.EmailTextBox.SendKeys(user.Email);
@@ -43,26 +41,19 @@ namespace BJSS.BddSteps
             // todo : make this view quickview (used other way so I can get the rest of the stuff done)
             featureditems[0].Click();
 
-            /*Actions builder = new Actions(PageFactory.WebDriver);
-            builder.MoveToElement(featureditems[0]).Perform();*/
-
-            // By locator = By.ClassName("quick-view");
-
-            //Actions builder = new Actions(PageFactory.WebDriver);
-          //  IWebElement element = featureditems[0];
-           // builder.MoveToElement(element).Build().Perform();
-            // driver.manage().timeouts().implicitlyWait(10, TimeUnit.Seconds)
+            // I needed more time to deal with the mouseover in selenium
         }
 
         [When(@"I change the size of the item")]
         public void WhenIChangeTheSizeOfTheItem()
         {
-            //ScenarioContext.Current.Pending();
+            ScenarioContext.Current.Pending();
         }
 
         [When(@"I add that item to my basket")]
         public void WhenIAddThatItemToMyBasket()
         {
+            //  I needed more time to deal with the lightbox in selenium
             PageFactory.ProductPage.BuyButton.Click();
         }
 
@@ -75,7 +66,8 @@ namespace BJSS.BddSteps
         [When(@"I Quick View a different item")]
         public void WhenIQuickViewADifferentItem()
         {
-            ScenarioContext.Current.Pending();
+            var featureditems = PageFactory.HomePage.FeaturedItems;
+            featureditems[1].Click();
         }
 
         [Then(@"I view the basket")]
@@ -123,7 +115,6 @@ namespace BJSS.BddSteps
         [Given(@"I am using (.*)")]
         public void GivenIAmUsing(string browserString)
         {
-            // todo: make PageFactory.Browser into Enum
             var browser = (Browser)Enum.Parse(typeof(Browser), browserString);
             PageFactory.Browser = browser;
         }

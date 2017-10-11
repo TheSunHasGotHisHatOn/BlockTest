@@ -67,7 +67,6 @@ namespace BJSS.Features
         [NUnit.Framework.DescriptionAttribute("As a user I want to successfully buy 2 items")]
         [NUnit.Framework.TestCaseAttribute("Chrome", null)]
         [NUnit.Framework.TestCaseAttribute("Firefox", null)]
-        [NUnit.Framework.TestCaseAttribute("InternetExplorer", null)]
         public virtual void AsAUserIWantToSuccessfullyBuy2Items(string browser, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("As a user I want to successfully buy 2 items", exampleTags);

@@ -1,10 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace BJSS.Pages.SubPages
 {
     public class NavBar
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public NavBar(IWebDriver driver)
         {
@@ -15,7 +16,14 @@ namespace BJSS.Pages.SubPages
         {
             get
             {
-                return _driver.FindElement(By.ClassName("login"));
+                try
+                {
+                    return _driver.FindElement(By.ClassName("login"));
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
         }
     }
