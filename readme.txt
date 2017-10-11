@@ -24,8 +24,7 @@ Features
 Pages
 
 3. Reports
-a. In the root directory there is a "Test" folder.  This contains the file RunTests.bat.  This file runs the tests and outputs the results (in the format yyyymmddhhmmss.xml) to a Results folder in the same directory.  
+a. In the root directory there is a "Test" folder.  This contains the file RunTests.bat.  This file runs the tests and outputs the results (in the format yyyymmddhhmmss.xml) to a Results folder in the same directory.  It also creates a more human readable version of the report using ReportUnit. 
 
 b. Tech Debt
 * I was hoping to create a symlink named "latest" pointing to the lastest xml file, however I'm working in Parallels on a mac, and it seems macs aren't too keen on using ntfs. 
-* Creating a more human-readable way of viewing the reports is a must.  There seem to be plenty of programs out there to output the nunit report in html - it looks fairly straightforward, but again, it's just been a matter of timing.

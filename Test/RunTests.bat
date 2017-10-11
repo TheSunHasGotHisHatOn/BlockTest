@@ -13,15 +13,13 @@ set minute=%time:~3,2%
 set second=%time:~6,2%
 set filename=%todaydate%%hour%%minute%%second%
 
-@echo about to run tests
-@echo results will be written to Results/%filename%.xml
+@echo About to run tests
+@echo Results will be written to Results/%filename%.xml
 pause
 ..\packages\NUnit.ConsoleRunner.3.7.0\tools\nunit3-console /result:Results/%filename%.xml  ../BJSS/bin/debug/BJSS.dll
 
-@echo delete latest.xml if it exists
-if exist Results/latest.xml del Results/latest.xml 
-@echo create new latest.xml
-mklink /H Results/latest.xml Results/%filename%.xml
+..\packages\ReportUnit.1.2.1\tools\reportunit Results/%filename%.xml Results/%filename%.html
+pause
 
-@echo finished running tests
+@echo Finished running tests
 pause
